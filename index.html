@@ -16,12 +16,15 @@
             <p class="toe">Toe</p>
         </div>
         <div class="game">
-            <div class="selector">
-                <button>VS Friend</button>
-                <span id="ending" ></span>
-                <button> VS Bot</button>
-            </div>
+            <button onclick="reset()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 26 26" width="24" height="24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 12a8 8 0 1 1-2.34-5.66" />
+                    <polyline points="20 4 20 10 14 10" />
+                </svg>
+            </button>
+            <div id="ending"></div>
             <div class="grid-container">
+                <div class="grid-item" data-index="0"></div>
                 <div class="grid-item" data-index="1"></div>
                 <div class="grid-item" data-index="2"></div>
                 <div class="grid-item" data-index="3"></div>
@@ -30,7 +33,6 @@
                 <div class="grid-item" data-index="6"></div>
                 <div class="grid-item" data-index="7"></div>
                 <div class="grid-item" data-index="8"></div>
-                <div class="grid-item" data-index="9"></div>
             </div>
         </div>
     </div>

@@ -1,78 +1,146 @@
-*{
+/* ====== RESET ====== */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-.container{
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.heads{
-    display: flex;
-    gap: 20px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-.tic{
-    color: rgb(214, 16, 16);
-}
-.tac{
-    color: rgb(145, 255, 0);
-}
-.toe{
-    color: rgb(30, 30, 211);
+    font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-p{
-    font-size: 80px;
-}
-.game{
-    width: 35%;
-    height: 70%;
-    background-color: grey;
+/* ====== BODY ====== */
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1f2933, #0f172a);
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    font-family:Arial, Helvetica, sans-serif;
-    flex-direction: column;
-    gap: 20px;
-}
-.selector{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    color: #e5e7eb;
 }
 
-.selector button{
-    border-radius: 10px;
-    border: none;
-    padding: 15px;
-    font-size: 17px;
-    background-color: rgba(165, 165, 165, 0.192);
-    border: 2px solid black;
+/* ====== CONTAINER ====== */
+.container {
+    background: rgba(15, 23, 42, 0.9);
+    padding: 2rem 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    animation: popIn 0.6s ease-out;
 }
+
+/* ====== TITLE ====== */
+.heads {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.tic { color: #38bdf8; }
+.tac { color: #22c55e; }
+.toe { color: #f97316; }
+
+.heads p {
+    transition: transform 0.25s ease;
+}
+
+.heads p:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* ====== GAME AREA ====== */
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ====== RESET BUTTON ====== */
+button {
+    background: #0f172a;
+    border: 1px solid #334155;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #e5e7eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+}
+
+button:hover {
+    background: #1e293b;
+    transform: rotate(-20deg) scale(1);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* ====== ENDING TEXT ====== */
+#ending {
+    min-height: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #facc15;
+    transition: opacity 0.3s ease;
+}
+
+/* ====== GRID ====== */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    width: 300px;
-    height: 300px;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 0.6rem;
 }
 
+/* ====== GRID ITEMS ====== */
 .grid-item {
+    background: #020617;
+    border-radius: 14px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    justify-content: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background 0.25s ease,
+        transform 0.15s ease,
+        box-shadow 0.25s ease;
 }
 
-/* Vertical lines */
-.grid-item{
-    border: 2px solid white;
+/* hover feedback */
+.grid-item:hover {
+    background: #020617;
+    box-shadow: inset 0 0 0 2px #38bdf8;
+    transform: translateY(-2px);
 }
 
+/* click feedback */
+.grid-item:active {
+    transform: scale(0.92);
+}
+
+/* ====== PLAYER COLORS (add via JS later) ====== */
+.grid-item.x {
+    color: #38bdf8;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+}
+
+.grid-item.o {
+    color: #22c55e;
+    text-shadow: 0 0 12px rgba(34, 197, 94, 0.6);
+}
+
+/* ====== ANIMATIONS ====== */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

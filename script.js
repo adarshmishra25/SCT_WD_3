@@ -1,28 +1,63 @@
 const cells = document.querySelectorAll(".grid-item");
-const elements = [];
-let count = 1;
+let board = Array(9).fill(null);
+let currentPlayer = "X";
+let gameOver = false;
+
+const winningPatterns = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
+    if (gameOver) return;
 
-    if (count == 9) {
-      cells.forEach((cell) => {
-        cell.innerHTML = "";
-      });
-      count = 1;
+    const index = Number(cell.dataset.index);
+    if (board[index]) return;
+
+    board[index] = currentPlayer;
+    cell.textContent = currentPlayer;
+
+    if (checkWinner()) {
+      document.getElementById("ending").innerText = `${currentPlayer} won`;
+      gameOver = true;
+      return;
+    }
+
+    if (board.every((cell) => cell !== null)) {
       document.getElementById("ending").innerText = "TIE";
+      gameOver = true;
+      return;
     }
-    
-    else if (count % 2 == 1 && !elements.includes(cell.dataset.index)) {
-      cell.innerHTML = "X";
-      elements.push(cell.dataset.index);
-      count++;
-    }
-    
-    else if (count % 2 == 0 && !elements.includes(cell.dataset.index)) {
-      cell.innerHTML = "O";
-      elements.push(cell.dataset.index);
-      count++;
-    
-    }
+
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
   });
 });
+
+function checkWinner() {
+  for (let pattern of winningPatterns) {
+    const a = pattern[0];
+    const b = pattern[1];
+    const c = pattern[2];
+    if (board[a] !== null && board[a] === board[b] && board[a] === board[c]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function reset() {
+  board.fill(null);
+  currentPlayer = "X";
+  gameOver = false;
+  cells.forEach((cell) => {
+    cell.textContent = "";
+  });
+  document.getElementById("ending").innerText = "";
+}
