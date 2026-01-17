@@ -121,7 +121,6 @@ button:active {
 .grid-item:active {
     transform: scale(0.92);
 }
-
 /* ====== PLAYER COLORS (add via JS later) ====== */
 .grid-item.x {
     color: #38bdf8;
